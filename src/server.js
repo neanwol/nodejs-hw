@@ -2,9 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import pinoHttp from 'pino-http';
 import pino from 'pino';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const notes = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 notes.use(cors());
 notes.use(pinoHttp());
