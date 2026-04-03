@@ -1,4 +1,4 @@
-import logger from './logger.js';
+import { logger } from './logger.js';
 import { HttpError } from "http-errors";
 
 export const errorHandler = (err, req, res, next) => {
@@ -11,7 +11,7 @@ export const errorHandler = (err, req, res, next) => {
       message: err.message || err.name,
     });
   }
-  
+
   res.status(500).json({
     message: isProd
       ? "Something went wrong. Please try again later."
