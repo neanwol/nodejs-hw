@@ -1,14 +1,15 @@
 import pino from 'pino';
+import pinoHttp from 'pino-http';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-let logger;
+let pinoInstance;
 
 if (process.env.NODE_ENV === 'production') {
-  logger = pino();
+  pinoInstance = pino();
 } else {
-  logger = pino({
+  pinoInstance = pino({
     transport: {
       target: 'pino-pretty',
       options: {
@@ -20,4 +21,4 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-export default logger;
+export const logger = pinoHttp(pinoInstance);
