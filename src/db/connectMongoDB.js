@@ -4,14 +4,14 @@ export const connectMongoDB = async () => {
   try {
     // Діагностика: перевіряємо, чи є змінна
     console.log('NODE_ENV:', process.env.NODE_ENV);
-    console.log('MONGODB_URI exists:', !!process.env.MONGODB_URI);
+    console.log('MONGO_URL exists:', !!process.env.MONGO_URL);
 
-    const mongoURI = process.env.MONGODB_URI;
+    const mongoURI = process.env.MONGO_URL;
 
     if (!mongoURI) {
-      console.error('❌ MONGODB_URI is not defined');
+      console.error('❌ MONGO_URL is not defined');
       console.error('Available env vars:', Object.keys(process.env));
-      throw new Error('MONGODB_URI environment variable is not set');
+      throw new Error('MONGO_URL environment variable is not set');
     }
 
     await mongoose.connect(mongoURI);
