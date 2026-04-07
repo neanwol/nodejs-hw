@@ -1,5 +1,5 @@
 import { Joi, Segments } from 'celebrate';
-import { TAGS } from '../constants/tags';
+import { TAGS } from '../constants/tags.js';
 import { isValidObjectId } from 'mongoose';
 
 const objectIdValidator = (value, helpers) => {
@@ -30,7 +30,7 @@ export const updateNoteSchema = {
 };
 
 export const getAllNotesSchema = {
-  [Segments.BODY]: Joi.object({
+  [Segments.QUERY]: Joi.object({
     page: Joi.number().integer().min(1).default(1).required().messages({
       "number.min": "Page must be at least {#limit}",
     }),
@@ -41,8 +41,8 @@ export const getAllNotesSchema = {
     }),
     tag: Joi.string().valid(...TAGS).messages({
       "any.only": "Tag must be one of: Work, Personal, Meeting, Shopping, Ideas, Travel, Finance, Health, Important, Todo",
-    }),
-    search: Joi.string().trim().allow('')
+    }).optional(),
+    search: Joi.string().trim().allow('').optional(),
   }),
 };
 
